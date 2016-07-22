@@ -8,7 +8,10 @@ class User < ApplicationRecord
 								format: { with: VALID_EMAIL_REGEX },
 								uniqueness: { case_sensitive: false }
 	has_secure_password
-   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  has_attached_file :avatar
+
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 	validates :password, presence: true, length: { minimum: 6 }
 
 
@@ -21,7 +24,6 @@ class User < ApplicationRecord
                                    dependent:   :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-
 
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)

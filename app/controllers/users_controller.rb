@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
   def show
   	@user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
+    @microposts = @user.microposts.paginate(page: params[:page], :per_page => 10)
   end
   def create
   	@user = User.new(user_params)
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.paginate(page: params[:page], :per_page => 5)
   end
 
   def destroy
@@ -62,7 +62,8 @@ class UsersController < ApplicationController
   private
 
   	def user_params
-  		params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  		params.require(:user).permit(:name, :email, :password,
+        :password_confirmation, :avatar)
   	end
 
     def correct_user

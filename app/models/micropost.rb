@@ -6,6 +6,7 @@ class Micropost < ApplicationRecord
   mount_uploader :picture, PictureUploader
   validate  :picture_size
 
+  has_many :comments, dependent: :destroy
   private
 
     def picture_size
