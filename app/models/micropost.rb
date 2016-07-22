@@ -5,8 +5,8 @@ class Micropost < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
   validate  :picture_size
-
   has_many :comments, dependent: :destroy
+
   private
 
     def picture_size
