@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     member do
       get :following, :followers
     end
+    resources :comments
   end
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :edit, :create, :update]
