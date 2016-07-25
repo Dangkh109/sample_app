@@ -1,6 +1,15 @@
-<li id="comment-<%= comment.id %>">
-
+<li>
+  <% usertmp = User.find_by(id: comment[:user_id]) %>
+  <%= link_to gravatar_for(usertmp, size: 50), usertmp %>
+  <span class="user"><%= link_to usertmp.name, usertmp %></span>
   <span class="content">
     <%= comment.content %>
+  </span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(comment.created_at) %> ago.
+    <% if current_user?(usertmp) %>
+      <%= link_to "delete", [usertmp, comment], method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    <% end %>
   </span>
 </li>

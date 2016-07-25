@@ -13,6 +13,18 @@
     <% end %>
   </span>
   <span>
-    <%= render 'shared/comment_form' %>
+    <%= render 'shared/comment_form', micropost: micropost %>
+    <% if micropost.comments.any? %>
+      <ol>
+        <% p = micropost.comments.count %>
+        <% t = 0 %>
+        <% micropost.comments.each do |comment| %>
+        <% t = t+1 %>
+        <% break if t>p%>
+        <%= render comment%>
+        <% end %>
+      </ol>
+    <% end %>
   </span>
+
 </li>

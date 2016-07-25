@@ -1,8 +1,10 @@
 <%= form_for([@user , @comment]) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="field">
-    <%= f.text_area :content, placeholder: "Comment..." %>
-  </div>
-  <%= hidden_field :micropost_id, value: micropost.id  %>
-  <%= f.submit "comment", class: "btn btn-primary" %>
+    <nav class="nav nav-default">
+      <ul class="nav navbar-nav">
+        <li> <%= f.text_area :content, placeholder: "Comment...", class: "field mycomment" %> </li>
+        <%= f.hidden_field :micropost_id, value: micropost.id  %>
+        <li> <%= f.submit "Comment", class: "btn btn-primary mybutton" %></li>
+      </ul>
+    </nav>
 <% end %>
